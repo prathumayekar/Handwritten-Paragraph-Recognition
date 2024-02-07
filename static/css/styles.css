@@ -1,0 +1,120 @@
+
+body {
+    background-color: #f0f8ff; /* Light Blue Background Color */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+
+
+button {
+    background-color: #28a745; /* Button Background Color */
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease; 
+}
+
+button:hover {
+    background-color: #218838; /* Hovered Button Background Color */
+    transform: scale(1.01);
+}
+
+
+label[for="file_upload"] {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f2f2f2;
+}
+
+
+.container.center {
+    text-align: center;
+}
+
+.container.center img {
+    display: block;
+    margin: 0 auto;
+}
+
+
+html, body {
+    height: 100%;
+    overflow: auto;
+}
+
+.model-tile .cta {
+    display: none;
+}
+
+.model-tile:hover .cta {
+    display: block;
+}
+.icon-image{
+    height: 150px;
+}
+
+.cta {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.cta-btn {
+    background-color: #88aeff; /* A neutral shade for the button */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #1c88ec;
+}
+
+#loadingAnimation{
+    text-align: center;
+}
+
+#loadingAnimation img{
+    margin: 25px 0;
+    height: 130px;
+}
+
+.ocr-result{
+    font-size: 20px;
+}
+
+.img-caption-eda{
+    margin: 10px;
+}
+.img-fluid {
+    margin-bottom: 20px; /* Spacing between images */
+}

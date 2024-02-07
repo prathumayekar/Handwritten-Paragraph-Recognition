@@ -1,0 +1,10 @@
+numpy
+PIL
+tensorflow
+keras
+scikit-learn
+matplotlib
+pandas
+google
+google-generativeai
+Flask
