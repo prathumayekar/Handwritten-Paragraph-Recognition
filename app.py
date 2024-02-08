@@ -2,6 +2,10 @@ from flask import Flask, request, render_template, jsonify
 import google.generativeai as genai
 import google.ai.generativelanguage as glm
 import tensorflow as tf
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 app = Flask(__name__)
@@ -33,7 +37,8 @@ safety_settings = [
 ]
 
 
-API_KEY = 'AIzaSyAnBGGRvbIWM6DYkEIvXGxqWMlIRCZLB6A'
+# API_KEY = 'AIzaSyAnBGGRvbIWM6DYkEIvXGxqWMlIRCZLB6A'
+API_KEY = os.getenv("API_KEY")
 genai.configure(api_key=API_KEY)
 # app routes and api endpoints
 
