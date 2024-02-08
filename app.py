@@ -44,11 +44,12 @@ genai.configure(api_key=API_KEY)
 # for index
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("home.html")
+
 
 @app.route("/handwriting-ocr")
 def ocrHandwriting():
-    return render_template("ocr-recognition.html")
+    return render_template("recognition.html")
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -89,7 +90,9 @@ def upload():
 
 @app.route("/eda-analysis")
 def edaAnalysis():
-    return render_template("eda-analysis.html")
+    return render_template("edaAnalyze.html")
+
+
 
 if __name__ == '__main__':
     with app.app_context():

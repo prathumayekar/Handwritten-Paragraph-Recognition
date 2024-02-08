@@ -1,0 +1,14 @@
+.box {
+    
+    background-color: blue;
+    animation: bounce 0.5s infinite alternate;
+  }
+  
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-5px); /* Adjust the distance the box bounces */
+    }
+  }

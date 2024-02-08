@@ -1,0 +1,36 @@
+{% extends "main.html" %}
+
+{% block title %}
+HandWritten Recognition
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-3">Try Our Model</h2>
+    <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="row d-flex justify-content-center">
+            <div class="form-group col-10 mb-2">
+                <label for="exampleInputPassword1">Upload Image for OCR</label>
+                <input type="file" class="form-control" name="file" required id="exampleInputPassword1"
+                    placeholder="Upload Image for OCR">
+            </div>
+        </div>
+        <div class="text-center  hide_on_load">
+            <button type="submit" class="btn btn-primary text-center">Upload</button>
+        </div>
+    </form>
+
+
+        <div style="display: none; justify-content: center;"  class="row extract-box mt-5">
+            <div class="card col-10 col-sm-6 text-center ">
+                <div class="card-header"  style="position: relative;">
+                    Extracted Text
+                    <p style="position: absolute;right: 20px; top: 28%; cursor: pointer;font-size: 10px;" class="copybutton btn btn-primary p-1" onclick="copyText" >Copy</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" id="ocr-result"></h5>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}
