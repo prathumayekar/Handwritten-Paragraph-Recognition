@@ -37,7 +37,6 @@ safety_settings = [
 ]
 
 
-# API_KEY = 'AIzaSyAnBGGRvbIWM6DYkEIvXGxqWMlIRCZLB6A'
 API_KEY = os.getenv("API_KEY")
 genai.configure(api_key=API_KEY)
 # app routes and api endpoints
