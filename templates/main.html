@@ -3,13 +3,14 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Qurno - {% block title %} {% endblock %}</title>
+  <title> - {% block title %} {% endblock %}</title>
 
   <meta name="author" content="Platol">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
   <meta name="description" content="Minimal Blog HTML Template">
 
-  <link rel="shortcut icon" href="static/assets/images/favicon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="static/images/handwriten.png" type="image/x-icon">
+  <!-- <img src="static/images/handwriten.png" alt="" srcset=""> -->
 
   <!-- CSS Plugins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,15 +33,16 @@
       <div class="col-12">
         <nav class="navbar navbar-expand-lg navbar-light p-0">
           <!-- logo -->
-          <a class='navbar-brand font-weight-bold mb-0' href='/qurno/' title='Qurno'>
-            <img class="img-fluid" width="110" height="35" src="assets/images/logo.png" alt="Qurno">
+          <a class='navbar-brand font-weight-bold mb-0' href='{{ url_for("index")}}' title='Qurno'>
+            <img class="img-fluid" width="50" height="35" src="static/images/handwriten.png" alt="handwriten"/>
           </a>
 
-          <button class="search-toggle d-inline-block d-lg-none ms-auto me-1 me-sm-3" data-toggle="search" aria-label="Search Toggle">
+          <!-- <button class="search-toggle d-inline-block d-lg-none ms-auto me-1 me-sm-3" data-toggle="search" aria-label="Search Toggle">
             <span>Search</span>
             <svg width="22" height="22" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          
+           -->
+           <button class= " search-toggle d-inline-block d-lg-none ms-auto me-1 me-sm-3 btn btn-primary">Login</button>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHeader" aria-controls="navHeader" aria-expanded="false" aria-label="Toggle navigation">
             <i class="ti ti-menu-2 menu-open"></i>
@@ -145,12 +147,11 @@
     <div class="pb-5">
       <div class="row g-2 g-lg-4 align-items-center">
         <div class="col-lg-6 text-center text-lg-start">
-          <p class="mb-0 copyright-text content">&copy;2022 Qurno. All rights reserved.</p>
+          <p class="mb-0 copyright-text content">Make in India &#10084;&#65039;</p>
         </div>
         <div class="col-lg-6 text-center text-lg-end">
           <ul class="list-inline footer-menu">
-            <li class="list-inline-item m-0"><a href='/qurno/privacy'>Privacy Policy</a></li>
-            <li class="list-inline-item m-0"><a href='/qurno/404-page'>404 Page</a></li>
+            <li class="list-inline-item m-0"><span>Send Feedback at: <a href="mailto:mayekarprathu42@gmail.com">mayekarprathu42@gmail.com</a></span></li>
           </ul>
         </div>
       </div>
