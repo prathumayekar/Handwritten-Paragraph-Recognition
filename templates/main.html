@@ -87,9 +87,8 @@
                       Hello
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <a class="dropdown-item" href="#">Your History</a>
+                      <a class="dropdown-item btn btn-primary text-white" href="{{url_for('logout')}}"><i class="ti ti-logout"></i> Logout</a>
                     </div>
                   </div>
                   {% else %}
