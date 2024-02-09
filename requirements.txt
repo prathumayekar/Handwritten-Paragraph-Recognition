@@ -8,4 +8,5 @@ pandas
 google
 google-generativeai
 flask
-dotenv
+python-dotenv
+passlib

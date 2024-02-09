@@ -15,6 +15,10 @@
     </div>  
     <h2>HandWriting Recognition</h2>
     <p>Extract text easily from images with HandWritten images</p>
+    {% if session['loginid'] %}
     <a href="{{ url_for('ocrHandwriting') }}" class="btn btn-primary box">Try It</a>
+    {% else %}
+    <a href="{{ url_for('login') }}" class="btn btn-primary box">Login & Try</a>
+    {% endif %}
 </div>
 {% endblock %}

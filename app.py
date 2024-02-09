@@ -1,16 +1,20 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify,flash,redirect,url_for,session
 import google.generativeai as genai
 import google.ai.generativelanguage as glm
 import tensorflow as tf
 from dotenv import load_dotenv
 import os
 from flask_mysqldb import MySQL
+import secrets
+from passlib.hash import sha256_crypt
 
+# Generate a secure random secret key
+secret_key = secrets.token_hex(16)
 load_dotenv()
 
 
 app = Flask(__name__)
-
+app.secret_key = 'secret_key'
 # connnection to database
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = "root"
@@ -104,22 +108,85 @@ def upload():
 def edaAnalysis():
     return render_template("edaAnalyze.html")
 
-@app.route("/login")
+@app.route("/login", methods=["POST","GET"])
 def login():
-    return render_template("login.html")
-
-@app.route("/signup")
-def signup():
-    return render_template("signup.html")
-
-@app.route("/logindata",methods=['GET','POST'])
-def logindata():
     if request.method == "POST":
-      username = request.form.get("username")
-      password = request.form.get("password")
-      return f"Your name is username:{username} password:{password}"
-    
+      username = request.form["username"]
+      password = request.form["password"]
+      cur = mysql.connection.cursor()
 
+      # exceuting query to get specific username,password
+      cur.execute("SELECT username,password FROM users WHERE username=%s",(username,))
+      user_exists = cur.fetchone()
+
+      # checking if username is present in db
+      if user_exists:
+          store_username,store_password = user_exists
+
+          # if present check user entered password with stored hash password
+          if sha256_crypt.verify(password, store_password):
+            # Password is correct
+
+            # if password is correct redirect to home page
+            session['loginid'] = True
+            return redirect(url_for("index"))
+          else:
+
+            # if password does not match with stored password give error
+            flash("username or password incorrect", "error")
+            return redirect(url_for('login'))
+
+      else:
+          # if user is not found in database generated error
+          flash("No Account Found with this username", "error")
+          return redirect(url_for('login'))
+
+
+    else:
+      return render_template("login.html")
+
+@app.route("/signup", methods=["POST", "GET"])
+def signup():
+    if request.method == "POST":
+      username = request.form['username']
+      password = request.form['password']
+      cpassword = request.form['cpassword']
+      hashed_password = sha256_crypt.hash(password)
+      cur = mysql.connection.cursor()
+      
+
+      # checking if password and cpassword matched
+      if password != cpassword:
+        flash("Password and Confirm password should match", "error")
+        return redirect(url_for('signup'))
+      else:
+        # checking if username is already taken
+        cur.execute("SELECT username from users WHERE username=%s",(username,))
+        is_taken = cur.fetchone()
+        print(is_taken)
+
+        if is_taken:
+            flash("Username Already Taken", "error")
+            return redirect(url_for('signup'))
+        
+
+      
+        #if everything is alright Proceed with registration
+        cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hashed_password))
+        mysql.connection.commit()
+        cur.close()
+        flash("Registration Successful! Login", "success")
+        return redirect(url_for("login"))
+    else:
+        return render_template("signup.html")
+
+@app.route('/logout')
+def logout():
+    # Clear the session data
+    session.clear()
+    # Redirect the user to the login page or any other desired page
+    return redirect(url_for('login'))
+
+    
 if __name__ == '__main__':
-    with app.app_context():
-        app.run(debug=True)
+    app.run(debug=True)

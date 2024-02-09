@@ -8,7 +8,14 @@
 <div class="row d-flex justify-content-center">
     <div class="col-sm-10 col-md-6">
         <h3>Login</h3>
-<form action="{{url_for('logindata')}} method="POST">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for me in messages %}
+          <p class="bg-primary text-white border-2 p-1 text-center">{{me}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+<form action="#" method="POST">
     <div class="form-group mb-2">
       <label for="username">Username</label>
       <input type="tezt" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter Username">
@@ -19,7 +26,7 @@
     </div>
   
     <button type="submit" class="btn btn-primary mb-2">Submit</button>
-    <p>New Here? <span class="text-light"><a href="{{ url_for('signup')}}">Sign Up</a></span></p>
+    <p>New Here? <span class="text-primary"><a href="{{ url_for('signup')}}">Sign Up</a></span></p>
   </form>
 </div>
 </div>
