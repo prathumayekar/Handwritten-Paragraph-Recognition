@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title> - {% block title %} {% endblock %}</title>
+  <title>HandWritingRecognizer - {% block title %} {% endblock %}</title>
 
   <meta name="author" content="Platol">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -23,6 +23,7 @@
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="static/assets/css/style.css">
   <link rel="stylesheet" href="static/assets/css/animation.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-grid.min.css" integrity="sha512-ZuRTqfQ3jNAKvJskDAU/hxbX1w25g41bANOVd1Co6GahIe2XjM6uVZ9dh0Nt3KFCOA061amfF2VeL60aJXdwwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -67,7 +68,7 @@
             <div class="navbar-right d-none d-lg-inline-block">
               <ul class="social-links list-unstyled list-inline">
                 <li class="list-inline-item ms-4 d-none d-lg-inline-block">
-                  <button class="btn btn-primary">Login</button>
+                  <a href="{{url_for('login')}}" class="btn btn-primary" >Login</a>
                 </li>
               </ul>
             </div>
@@ -158,11 +159,14 @@
     </div>
   </div>
 </footer>
+
+
 <!-- end of footer -->
 
 <!-- JS Plugins -->
 <script src="static/plugins/bootstrap/bootstrap.min.js"></script>
 <script src="static/plugins/lightense/lightense.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Main Script -->
 <script src="static/assets/js/script.js"></script>

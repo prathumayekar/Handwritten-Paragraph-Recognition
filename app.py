@@ -4,11 +4,20 @@ import google.ai.generativelanguage as glm
 import tensorflow as tf
 from dotenv import load_dotenv
 import os
+from flask_mysqldb import MySQL
 
 load_dotenv()
 
 
 app = Flask(__name__)
+
+# connnection to database
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = "root"
+app.config['MYSQL_PASSWORD'] = "1234"
+app.config['MYSQL_DB'] = "handwrittenocr"
+
+mysql = MySQL(app)
 
 generation_config = {
   "temperature": 0.1,
@@ -44,7 +53,10 @@ genai.configure(api_key=API_KEY)
 # for index
 @app.route("/")
 def index():
-    return render_template("home.html")
+    # checking if connection is successful
+    cur = mysql.connection.cursor()
+    cur.close()
+    return render_template("home.html",data=cur)
 
 
 @app.route("/handwriting-ocr")
@@ -92,7 +104,21 @@ def upload():
 def edaAnalysis():
     return render_template("edaAnalyze.html")
 
+@app.route("/login")
+def login():
+    return render_template("login.html")
 
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
+@app.route("/logindata",methods=['GET','POST'])
+def logindata():
+    if request.method == "POST":
+      username = request.form.get("username")
+      password = request.form.get("password")
+      return f"Your name is username:{username} password:{password}"
+    
 
 if __name__ == '__main__':
     with app.app_context():
