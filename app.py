@@ -16,10 +16,10 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'secret_key'
 # connnection to database
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = "root"
-app.config['MYSQL_PASSWORD'] = "1234"
-app.config['MYSQL_DB'] = "handwrittenocr"
+app.config['MYSQL_HOST'] = os.getenv("HOST_NAME")
+app.config['MYSQL_USER'] = os.getenv("HOST_USER")
+app.config['MYSQL_PASSWORD'] = os.getenv("HOST_PASSWORD")
+app.config['MYSQL_DB'] = os.getenv("HOST_DB")
 
 mysql = MySQL(app)
 
@@ -65,7 +65,12 @@ def index():
 
 @app.route("/handwriting-ocr")
 def ocrHandwriting():
-    return render_template("recognition.html")
+    if 'loginid' in session:
+       
+      return render_template("recognition.html")
+    else:
+       flash("To use OCR you need to login first","warning")
+       return redirect(url_for("login"))
 
 @app.route('/upload', methods=['POST'])
 def upload():
