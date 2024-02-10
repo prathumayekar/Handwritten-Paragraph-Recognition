@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, jsonify,flash,redirect,url_for,session
 import google.generativeai as genai
+import datetime
 import google.ai.generativelanguage as glm
 import tensorflow as tf
 from dotenv import load_dotenv
@@ -58,19 +59,37 @@ genai.configure(api_key=API_KEY)
 @app.route("/")
 def index():
     # checking if connection is successful
+    
     cur = mysql.connection.cursor()
     cur.close()
     return render_template("home.html",data=cur)
 
 
-@app.route("/handwriting-ocr")
+@app.route("/handwriting-ocr",methods=["POST","GET"])
 def ocrHandwriting():
     if 'loginid' in session:
-       
-      return render_template("recognition.html")
+      
+      if request.method == "POST":
+        if 'image_path' in session and 'extract_text' in session and 'user_id' in session:
+          ocr_image = session['image_path']
+          password = session['extract_text']
+          accuracy = request.form.get('rate_ocr')
+          user_id=session['user_id']
+          cur = mysql.connection.cursor()
+
+          cur.execute("INSERT INTO ocr_test(user_id,ocr_image,ocr_text,accuracy) VALUES(%s,%s,%s,%s)",(user_id,ocr_image,password,accuracy))
+          mysql.connection.commit()
+          cur.close()
+          session.pop("ocr_image",None)
+          session.pop("extract_text",None)
+          # flash("To use OCR you need to login first","warning")
+          return redirect(url_for("historyPage"))
+        else:
+           return "No data"
     else:
        flash("To use OCR you need to login first","warning")
        return redirect(url_for("login"))
+    return render_template("recognition.html")
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -79,8 +98,12 @@ def upload():
     file = request.files['file']
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
-    
-    temp_path = r"static\uploads\file.jpg"  # Specify a path to save the uploaded file temporarily
+
+    current_datetime = datetime.datetime.now()
+    formatted_datetime = current_datetime.strftime("%Y-%m-%d_%H-%M-%S")
+   
+    temp_path = f"static/uploads/{formatted_datetime}.jpg"
+    session['image_path'] = temp_path
     file.save(temp_path)
     
     # # Read the image bytes
@@ -106,7 +129,7 @@ def upload():
 
     # Resolve the response
     response.resolve()
-        
+    session['extract_text'] = response.text
     return jsonify({'extracted_text': response.text})
 
 @app.route("/eda-analysis")
@@ -121,12 +144,14 @@ def login():
       cur = mysql.connection.cursor()
 
       # exceuting query to get specific username,password
-      cur.execute("SELECT username,password FROM users WHERE username=%s",(username,))
+      cur.execute("SELECT id,username,password FROM users WHERE username=%s",(username,))
       user_exists = cur.fetchone()
+      
 
       # checking if username is present in db
       if user_exists:
-          store_username,store_password = user_exists
+          user_id,store_username,store_password = user_exists
+          # return f"{user_id} {store_username}  {store_password}"
 
           # if present check user entered password with stored hash password
           if sha256_crypt.verify(password, store_password):
@@ -134,11 +159,14 @@ def login():
 
             # if password is correct redirect to home page
             session['loginid'] = True
+            session['user_id'] = user_id
+            session['name'] = store_username
+          
             return redirect(url_for("index"))
           else:
 
             # if password does not match with stored password give error
-            flash("username or password incorrect", "error")
+            flash("Password incorrect", "error")
             return redirect(url_for('login'))
 
       else:
@@ -191,6 +219,17 @@ def logout():
     session.clear()
     # Redirect the user to the login page or any other desired page
     return redirect(url_for('login'))
+
+
+@app.route("/history")
+def historyPage():
+    cur = mysql.connection.cursor()
+    if 'user_id' in session:
+      # exceuting query to get specific username,password
+      cur.execute("SELECT * FROM ocr_test WHERE user_id=%s ORDER BY id DESC",(session['user_id'],))
+      user_exists = cur.fetchall()
+    
+    return render_template("history.html",datas=user_exists)
 
     
 if __name__ == '__main__':
