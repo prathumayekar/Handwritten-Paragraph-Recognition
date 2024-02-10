@@ -11,7 +11,9 @@
         {% with messages = get_flashed_messages() %}
         {% if messages %}
           {% for me in messages %}
-          <p class="bg-primary text-white border-2 p-1 text-center">{{me}}</p>
+          <div class="d-flex justify-content-center">
+          <p class="bg-primary text-white border-2 p-1 text-center rounded w-50">{{me}}</p>
+          </div>  
           {% endfor %}
         {% endif %}
       {% endwith %}
@@ -26,7 +28,7 @@
     </div>
   
     <button type="submit" class="btn btn-primary mb-2">Submit</button>
-    <p>New Here? <span class="text-primary"><a href="{{ url_for('signup')}}">Sign Up</a></span></p>
+    <p>New Here? <span class="text-primary"><a class="text-primary" href="{{ url_for('signup')}}">Sign Up</a></span></p>
   </form>
 </div>
 </div>

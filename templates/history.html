@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2 class="section-title">
+            <span>Your History</span>
+          </h2>
+        </div>
+      </div>
+      
+      <div class="row gy-5 gx-4 g-xl-5">
+        {% for data in datas %}
+       
+        <div class="col-lg-6">
+          <article class="card post-card h-100 border-0 bg-transparent">
+            <div class="card-body">
+                <div class="post-image position-relative">
+                  <img class="w-100 h-auto rounded" src="{{data[1]}}" alt="{{data[2]}}" width="970" height="500">
+                </div>
+              <h4>{{data[2]}}</h4>
+              <p>Accuracy: {{data[3]}}%</p>
+            </div>
+            
+          </article>
+        </div>
+        {% endfor %}
+        
+       
+      </div>
+    </div>
+  </section>
+{% endblock %}

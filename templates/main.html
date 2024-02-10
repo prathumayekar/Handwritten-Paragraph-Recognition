@@ -45,14 +45,13 @@
           </button>
            -->
            {% if session['loginid'] %}
-           <div class="dropdown  d-inline-block d-lg-none ms-auto ">
-            <a class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Hello
+           <div class="dropdown  d-sm-inline-block d-lg-none ms-auto ">
+            <a class=" dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i  class="text-dark fs-1 ti ti-user-circle"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Your History</a>
+              <a class="dropdown-item btn btn-primary text-white" href="{{url_for('logout')}}"><i class="ti ti-logout"></i> Logout</a>
             </div>
           </div>
            {% else %}
@@ -83,11 +82,11 @@
                 <li class="list-inline-item ms-4 d-none d-lg-inline-block">
                   {% if session['loginid'] %}
                   <div class="dropdown  d-sm-none d-lg-inline-block ms-auto ">
-                    <a class="btn btn-primary dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Hello
+                    <a class=" dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i  class="text-dark fs-1 ti ti-user-circle"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Your History</a>
+                      <a class="dropdown-item" href="{{url_for('historyPage')}}">Your History</a>
                       <a class="dropdown-item btn btn-primary text-white" href="{{url_for('logout')}}"><i class="ti ti-logout"></i> Logout</a>
                     </div>
                   </div>

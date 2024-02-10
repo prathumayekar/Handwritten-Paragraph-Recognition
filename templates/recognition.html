@@ -7,6 +7,7 @@ HandWritten Recognition
 {% block content %}
 <div class="container">
     <h2 class="text-center mb-3">Try Our Model</h2>
+    
     <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
         <div class="row d-flex justify-content-center">
             <div class="form-group col-10 mb-2">
@@ -30,7 +31,16 @@ HandWritten Recognition
                 <div class="card-body">
                     <h5 class="card-title" id="ocr-result"></h5>
                 </div>
+                <hr>
+                <form action="#" method="POST">
+                <label for="customRange2" class="form-label text-dark">Rate OCR Accuracy (0%-100%)</label>
+<input type="range" class="form-range" name="rate_ocr" min="0%" max="100%" id="customRange2">
+<button class="btn btn-primary mb-1">Submit</button>
             </div>
+        </form>
+            
         </div>
+       
+        
 </div>
 {% endblock %}
