@@ -13,6 +13,9 @@
   <link rel="shortcut icon" href="static/images/handwriten.png" type="image/x-icon">
   <!-- <img src="static/images/handwriten.png" alt="" srcset=""> -->
 
+  <!-- clipboard cdn -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+
   <!-- CSS Plugins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -194,6 +197,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Main Script -->
+<!-- copy button script -->
+<script>
+  var clipboard = new ClipboardJS('.copy-button');
+  console.log(clipboard);
+  // clipboard.on('success', function(e) {
+  //     console.log('Text copied to clipboard:', e.text);
+  //     // Optionally, you can show a success message to the user
+  //     alert('Text copied to clipboard!');
+  // });
+
+  // clipboard.on('error', function(e) {
+  //     console.error('Failed to copy text:', e.text);
+  //     // Optionally, you can show an error message to the user
+  //     alert('Failed to copy text to clipboard :(');
+  // });
+</script>
+
+
 <script src="static/assets/js/script.js"></script>
 <script src="static/js/upload.js"></script
 

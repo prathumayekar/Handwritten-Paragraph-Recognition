@@ -26,10 +26,10 @@ HandWritten Recognition
             <div class="card col-10 col-sm-6 text-center ">
                 <div class="card-header"  style="position: relative;">
                     Extracted Text
-                    <p style="position: absolute;right: 20px; top: 28%; cursor: pointer;font-size: 10px;" class="copybutton btn btn-primary p-1" onclick="copyText" >Copy</p>
+                    <p style="position: absolute;right: 20px; top: 28%; cursor: pointer;font-size: 10px;" data-clipboard-target="#text-to-copy" class="copybutton btn btn-primary p-1" onclick="copyText" >Copy</p>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title" id="ocr-result"></h5>
+                    <h5 class="card-title"  id="ocr-result"  class="text-to-copy"></h5>
                 </div>
                 <hr>
                 <form action="#" method="POST">

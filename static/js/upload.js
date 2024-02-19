@@ -90,6 +90,6 @@ function copyText() {
         },3000)
 
         let extract_text = document.querySelector("#ocr-result");
-        console.log(extract_text);
-        navigator.clipboard.writeText(extract_text)
+        console.log(extract_text.textContent);
+        navigator.clipboard.writeText(extract_text.textContent)
   })
